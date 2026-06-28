@@ -1,53 +1,80 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * Design tokens for the Merchant Detail screen, sourced from the client's Figma spec.
+ * Colours are bespoke to the brand — do not substitute with Tailwind/system defaults.
  */
 
-import { Platform } from 'react-native';
+function withOpacity(hex: string, alpha: number): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const muted = '#6B6B73';
 
 export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
+  maroon: '#6B1E2A',
+  cream: '#FAF5E9',
+  ink: '#1A1A22',
+  muted,
+  slate: '#3A3A4D',
+  gold: '#E0B860',
+  white: '#FFFFFF',
+  border: withOpacity(muted, 0.18),
+  overlay: withOpacity('#FFFFFF', 0.24),
+} as const;
+
+export const Spacing = {
+  screenPadding: 18,
+  sectionGapTop: 28,
+  sectionGapBottom: 18,
+  stackGap: 12,
+} as const;
+
+export const Radius = {
+  card: 16,
+  button: 12,
+  pill: 999,
+} as const;
+
+type TypeStyle = {
+  fontFamily: string;
+  fontSize: number;
+  lineHeight: number;
+  letterSpacing?: number;
+  fontWeight: '400' | '600' | '700';
 };
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+export const Typography: Record<'display' | 'headline' | 'body' | 'caption' | 'numeric', TypeStyle> = {
+  display: {
+    fontFamily: 'Inter_700Bold',
+    fontSize: 28,
+    lineHeight: 32,
+    letterSpacing: -1,
+    fontWeight: '700',
   },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+  headline: {
+    fontFamily: 'Inter_600SemiBold',
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '600',
   },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  body: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 14,
+    lineHeight: 22,
+    fontWeight: '400',
   },
-});
+  caption: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: '400',
+  },
+  numeric: {
+    fontFamily: 'Inter_700Bold',
+    fontSize: 24,
+    lineHeight: 28,
+    fontWeight: '700',
+  },
+};

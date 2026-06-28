@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+# Merchant Detail — Loyalty Program (Qtap test task)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A pixel-fidelity build of the **Merchant Detail** screen in two loyalty states — **Points** (with Active offers) and **Stamps** — built with Expo SDK 54 + Expo Router.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Run it
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Then open in:
 
-## Learn more
+- **Expo Go** — scan the QR code with your phone
+- **iOS Simulator** — press `i` in the terminal
+- **Android Emulator** — press `a` in the terminal
+- **Web** — press `w` in the terminal (or `npm run web`)
 
-To learn more about developing your project with Expo, look at the following resources:
+The app boots straight into the Merchant Detail screen — there's no other route.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Switching states
 
-## Join the community
+A "Preview state" segmented control is pinned to the top of the screen (above the actual Figma content) — tap **Points** / **Stamps** to re-render the whole screen from the same mock data object. This control is tooling for the reviewer, not part of the Figma design.
 
-Join our community of developers creating universal apps.
+## Project structure
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `data/mock-merchant.ts` — the single mock data object (`merchant`, `pointsProgram`, `stampCard`, `offers`) that drives both states.
+- `types/loyalty.ts` — typed shape for that data.
+- `constants/theme.ts` — design tokens (colour, typography, spacing, radius) from the client's spec. No inline hex/magic numbers in components.
+- `components/` — typed, reusable presentational components (`Header`, `HeroImage`, `InfoRow`, `PointsCard`, `StampCard`, `OfferCard`, `Contacts`, `PrimaryButton`, plus internal helpers like `BrandLogo`, `CurrentCardShell`, `ProgressBar`, `StampGrid`, `Chip`).
+
+## Implementation notes
+
+- The literal field list didn't include a short loyalty-brand label distinct from the branch name (header/current-card show "Starbuks" while the H1 below the hero shows the branch "Al Mirqab Al Jadeed"). I added `merchant.brand_name` to cover that slot rather than hardcoding the string in two places.
+- `merchant.logo_url` is seeded as `null` on purpose to exercise the null-fallback path (renders a brand-initial badge instead of an image); `cover_image_url` is seeded with a real placeholder photo to keep the hero section visually representative — the same fallback pattern is implemented for it too, just not exercised by the default seed.
+- Offer "Expires in" countdowns tick down live client-side from `expires_in` (seconds) — a small bit of interactivity since this is a runnable prototype, not just a static render.
+
+## What I'd improve with more time
+
+- Pull exact values from Figma Dev Mode (I worked from flattened screenshots + the client's token sheet) to tighten spacing/line-height in a couple of spots I had to eyeball, like the offer card seal icon and ribbon proportions.
+- Add a reward-list/detail sheet behind "Reward option" — out of scope for this screen, but it's the obvious next screen in the flow.
+- Snapshot/unit tests for the derived-progress logic (next reward selection, stamp fill ratio) to lock in correctness as the data model grows.
