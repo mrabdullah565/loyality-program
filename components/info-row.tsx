@@ -1,9 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, View } from 'react-native';
+import ForkSpoon from "@/assets/icons/fork-spoon.svg";
+import Star from "@/assets/icons/star.svg";
+import { StyleSheet, View } from "react-native";
 
-import { AppText } from '@/components/app-text';
-import { Chip } from '@/components/chip';
-import { Colors, Spacing } from '@/constants/theme';
+import { AppText } from "@/components/app-text";
+import { Chip } from "@/components/chip";
+import { Colors, Spacing } from "@/constants/theme";
 
 export type InfoRowProps = {
   distanceKm: number;
@@ -14,14 +15,15 @@ export type InfoRowProps = {
 export function InfoRow({ distanceKm, category, rating }: InfoRowProps) {
   return (
     <View style={styles.row}>
-      <AppText variant="body" weight="600" color={Colors.ink}>
+      <AppText variant="headline" weight="700" color={Colors.ink}>
         {distanceKm} km
       </AppText>
-      <Chip icon="restaurant-outline" label={category} />
+      <Chip icon={ForkSpoon} label={category} />
       <View
         style={styles.ratingBadge}
-        accessibilityLabel={`Rated ${rating} out of 5`}>
-        <Ionicons name="star" size={16} color={Colors.maroon} />
+        accessibilityLabel={`Rated ${rating} out of 5`}
+      >
+        <Star width={26} height={26} />
       </View>
     </View>
   );
@@ -29,18 +31,18 @@ export function InfoRow({ distanceKm, category, rating }: InfoRowProps) {
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.stackGap,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.gap9,
   },
   ratingBadge: {
-    marginLeft: 'auto',
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    borderWidth: 2,
+    marginLeft: "auto",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 6,
     borderColor: Colors.maroon,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

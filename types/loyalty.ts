@@ -3,7 +3,7 @@ export type Merchant = {
   brand_name: string;
   name: string;
   description: string;
-  cover_image_url: string | null;
+  cover_image_url: string | number | null;
   logo_url: string | null;
   rating: number;
   distance_km: number;

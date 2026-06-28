@@ -1,3 +1,5 @@
+import Fire from "@/assets/icons/fire.svg";
+import Users from "@/assets/icons/users.svg";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
@@ -13,7 +15,6 @@ import { InfoRow } from "@/components/info-row";
 import { OfferCard } from "@/components/offer-card";
 import { PointsCard } from "@/components/points-card";
 import { StampCard } from "@/components/stamp-card";
-import { StateToggle } from "@/components/state-toggle";
 import { Colors, Radius, Spacing } from "@/constants/theme";
 import {
   merchant,
@@ -38,7 +39,7 @@ export default function MerchantDetailScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      <StateToggle value={loyaltyState} onChange={setLoyaltyState} />
+      {/* <StateToggle value={loyaltyState} onChange={setLoyaltyState} /> */}
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -73,14 +74,15 @@ export default function MerchantDetailScreen() {
 
           <View style={styles.badgeRow}>
             <Chip
-              icon="people-outline"
+              icon={Users}
               label={`${merchant.members_count}+ members`}
+              variant="outlined"
             />
-            <Chip icon="flame-outline" label="Active this week" />
+            <Chip icon={Fire} label="Active this week" variant="outlined" />
           </View>
         </View>
 
-        <View style={styles.section}>
+        <View style={styles.ptsStmCard}>
           <AppText
             variant="headline"
             weight="600"
@@ -175,8 +177,12 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 32,
   },
+  ptsStmCard: {
+    paddingHorizontal: Spacing.padding2XL,
+    marginTop: Spacing.gap9 + 2,
+  },
   section: {
-    paddingHorizontal: Spacing.screenPadding,
+    paddingHorizontal: Spacing.padding2XL,
     marginTop: Spacing.sectionGapTop,
   },
   sectionLabel: {
@@ -186,7 +192,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   infoRowWrapper: {
-    marginTop: Spacing.stackGap,
+    marginTop: Spacing.paddingMD,
   },
   badgeRow: {
     flexDirection: "row",

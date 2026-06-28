@@ -1,3 +1,4 @@
+import heroImage from '@/assets/images/hero-image.png';
 import type { Merchant, Offer, PointsProgram, StampCardData } from '@/types/loyalty';
 
 export const merchant: Merchant = {
@@ -5,7 +6,7 @@ export const merchant: Merchant = {
   name: 'Al Mirqab Al Jadeed',
   description:
     'El pasaje estándar de lorem ipsum ha sido un aliado de los impresores durante siglos. Como las fotos de stock actuales, servía como marcador de posición para el contenido real. El texto original proviene de la obra filosófica de Cicerón "De Finibus Bonorum et Malorum", escrita en el año 45 a.C.',
-  cover_image_url: 'https://picsum.photos/seed/qtap-merchant-cover/1200/900',
+  cover_image_url: heroImage,
   logo_url: null,
   rating: 4.6,
   distance_km: 1.8,
