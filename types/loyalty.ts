@@ -32,6 +32,9 @@ export type StampCardData = {
   earn_rule_text: string;
 };
 
+import type React from 'react';
+import type { SvgProps } from 'react-native-svg';
+
 export type OfferStyle = 'plain' | 'featured';
 
 export type Offer = {
@@ -42,6 +45,8 @@ export type Offer = {
   expires_in: number;
   style: OfferStyle;
   discount_label?: string;
+  /** Scalloped badge artwork (SVG) shown on the left of non-ribbon offer cards. */
+  badge?: React.FC<SvgProps> | null;
 };
 
 export type LoyaltyState = 'points' | 'stamps';

@@ -15,6 +15,7 @@ import { InfoRow } from "@/components/info-row";
 import { OfferCard } from "@/components/offer-card";
 import { PointsCard } from "@/components/points-card";
 import { StampCard } from "@/components/stamp-card";
+import { StateToggle } from "@/components/state-toggle";
 import { Colors, Radius, Spacing } from "@/constants/theme";
 import {
   merchant,
@@ -39,7 +40,7 @@ export default function MerchantDetailScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      {/* <StateToggle value={loyaltyState} onChange={setLoyaltyState} /> */}
+      <StateToggle value={loyaltyState} onChange={setLoyaltyState} />
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -99,7 +100,9 @@ export default function MerchantDetailScreen() {
           )}
 
           <Pressable style={styles.termsButton} accessibilityRole="button">
-            <Ionicons name="chevron-up" size={16} color={Colors.ink} />
+            <View style={styles.circle}>
+              <Ionicons name="arrow-up" size={12} color={Colors.ink} />
+            </View>
             <AppText variant="body" weight="600" color={Colors.ink}>
               Tap for full terms
             </AppText>
@@ -194,6 +197,14 @@ const styles = StyleSheet.create({
   infoRowWrapper: {
     marginTop: Spacing.paddingMD,
   },
+  circle: {
+    height: 22,
+    width: 22,
+    backgroundColor: "#F0D793",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   badgeRow: {
     flexDirection: "row",
     gap: Spacing.stackGap,
@@ -204,13 +215,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
-    marginTop: Spacing.stackGap,
+    marginTop: Spacing.paddingRail,
     paddingVertical: 12,
     borderRadius: Radius.pill,
     backgroundColor: Colors.cream,
   },
   rewardButton: {
-    marginTop: Spacing.stackGap,
+    marginTop: Spacing.sectionGapTop,
   },
   offersList: {
     gap: Spacing.stackGap,

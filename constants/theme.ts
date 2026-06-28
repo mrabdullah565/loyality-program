@@ -13,7 +13,7 @@ function withOpacity(hex: string, alpha: number): string {
 const muted = "#ADADAD";
 
 export const Colors = {
-  maroon: "#6B1E2A",
+  maroon: "#8E4A63",
   cream: "#FAF5E9",
   ink: "#1A1A22",
   muted,
@@ -30,6 +30,7 @@ export const Spacing = {
   paddingLG: 18,
   paddingXL: 24,
   padding2XL: 28,
+  paddingRail: 22,
   sectionGapTop: 28,
   sectionGapBottom: 18,
   stackGap: 12,
